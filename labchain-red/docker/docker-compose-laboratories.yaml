@@ -2,8 +2,8 @@ version: '3.7'
 
 volumes:
   orderer.laboratories.com:
-  peer0.madrid.laboratories.com:
-  peer0.bogota.laboratories.com:
+  peer0.government.laboratories.com:
+  peer0.laboratoryA.laboratories.com:
 
 networks:
   test:
@@ -65,8 +65,8 @@ services:
     networks:
       - test
 
-  peer0.madrid.laboratories.com:
-    container_name: peer0.madrid.laboratories.com
+  peer0.government.laboratories.com:
+    container_name: peer0.government.laboratories.com
     image: hyperledger/fabric-peer:2.3.3
     labels:
       service: hyperledger-fabric
@@ -79,14 +79,14 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-      - CORE_PEER_ID=peer0.madrid.laboratories.com
-      - CORE_PEER_ADDRESS=peer0.madrid.laboratories.com:7051
+      - CORE_PEER_ID=peer0.government.laboratories.com
+      - CORE_PEER_ADDRESS=peer0.government.laboratories.com:7051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.madrid.laboratories.com:7052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.government.laboratories.com:7052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.madrid.laboratories.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.madrid.laboratories.com:7051
-      - CORE_PEER_LOCALMSPID=MadridMSP
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.government.laboratories.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.government.laboratories.com:7051
+      - CORE_PEER_LOCALMSPID=GovernmentMSP
       - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:17051
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb0:5984
@@ -94,9 +94,9 @@ services:
       - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw
     volumes:
         - /var/run/docker.sock:/host/var/run/docker.sock
-        - ../organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/msp:/etc/hyperledger/fabric/msp
-        - ../organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/tls:/etc/hyperledger/fabric/tls
-        - peer0.madrid.laboratories.com:/var/hyperledger/production
+        - ../organizations/peerOrganizations/government.laboratories.com/peers/peer0.government.laboratories.com/msp:/etc/hyperledger/fabric/msp
+        - ../organizations/peerOrganizations/government.laboratories.com/peers/peer0.government.laboratories.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.government.laboratories.com:/var/hyperledger/production
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
@@ -120,8 +120,8 @@ services:
     networks:
       - test
 
-  peer0.bogota.laboratories.com:
-    container_name: peer0.bogota.laboratories.com
+  peer0.laboratoryA.laboratories.com:
+    container_name: peer0.laboratoryA.laboratories.com
     image: hyperledger/fabric-peer:2.3.3
     labels:
       service: hyperledger-fabric
@@ -134,14 +134,14 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-      - CORE_PEER_ID=peer0.bogota.laboratories.com
-      - CORE_PEER_ADDRESS=peer0.bogota.laboratories.com:9051
+      - CORE_PEER_ID=peer0.laboratoryA.laboratories.com
+      - CORE_PEER_ADDRESS=peer0.laboratoryA.laboratories.com:9051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.bogota.laboratories.com:9052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.laboratoryA.laboratories.com:9052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:9052
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bogota.laboratories.com:9051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.bogota.laboratories.com:9051
-      - CORE_PEER_LOCALMSPID=BogotaMSP
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.laboratoryA.laboratories.com:9051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.laboratoryA.laboratories.com:9051
+      - CORE_PEER_LOCALMSPID=LaboratoryAMSP
       - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:19051
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb1:5984
@@ -149,9 +149,9 @@ services:
       - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw
     volumes:
         - /var/run/docker.sock:/host/var/run/docker.sock
-        - ../organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/msp:/etc/hyperledger/fabric/msp
-        - ../organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/tls:/etc/hyperledger/fabric/tls
-        - peer0.bogota.laboratories.com:/var/hyperledger/production
+        - ../organizations/peerOrganizations/laboratoryA.laboratories.com/peers/peer0.laboratoryA.laboratories.com/msp:/etc/hyperledger/fabric/msp
+        - ../organizations/peerOrganizations/laboratoryA.laboratories.com/peers/peer0.laboratoryA.laboratories.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.laboratoryA.laboratories.com:/var/hyperledger/production
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
@@ -178,7 +178,7 @@ services:
     volumes:
         - ../organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations
     depends_on:
-      - peer0.madrid.laboratories.com
-      - peer0.bogota.laboratories.com
+      - peer0.government.laboratories.com
+      - peer0.laboratoryA.laboratories.com
     networks:
       - test

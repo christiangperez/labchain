@@ -22,43 +22,43 @@ Organizations:
         OrdererEndpoints:
             - orderer.laboratories.com:7050
 
-    - &Madrid
-        Name: MadridMSP
-        ID: MadridMSP
+    - &Government
+        Name: GovernmentMSP
+        ID: GovernmentMSP
 
-        MSPDir: ../organizations/peerOrganizations/madrid.laboratories.com/msp
+        MSPDir: ../organizations/peerOrganizations/government.laboratories.com/msp
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('MadridMSP.admin', 'MadridMSP.peer', 'MadridMSP.client')"
+                Rule: "OR('GovernmentMSP.admin', 'GovernmentMSP.peer', 'GovernmentMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('MadridMSP.admin', 'MadridMSP.client')"
+                Rule: "OR('GovernmentMSP.admin', 'GovernmentMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('MadridMSP.admin')"
+                Rule: "OR('GovernmentMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('MadridMSP.peer')"
+                Rule: "OR('GovernmentMSP.peer')"
 
-    - &Bogota
-        Name: BogotaMSP
-        ID: BogotaMSP
+    - &LaboratoryA
+        Name: LaboratoryAMSP
+        ID: LaboratoryAMSP
 
-        MSPDir: ../organizations/peerOrganizations/bogota.laboratories.com/msp
+        MSPDir: ../organizations/peerOrganizations/laboratoryA.laboratories.com/msp
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('BogotaMSP.admin', 'BogotaMSP.peer', 'BogotaMSP.client')"
+                Rule: "OR('LaboratoryAMSP.admin', 'LaboratoryAMSP.peer', 'LaboratoryAMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('BogotaMSP.admin', 'BogotaMSP.client')"
+                Rule: "OR('LaboratoryAMSP.admin', 'LaboratoryAMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('BogotaMSP.admin')"
+                Rule: "OR('LaboratoryAMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('BogotaMSP.peer')"
+                Rule: "OR('LaboratoryAMSP.peer')"
 
 ################################################################################
 #   SECTION: Capabilities
@@ -161,6 +161,6 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Madrid
-                - *Bogota
+                - *Government
+                - *LaboratoryA
             Capabilities: *ApplicationCapabilities

@@ -2,8 +2,8 @@
 # "PeerOrgs" - Definition of organizations managing peer nodes
 # ---------------------------------------------------------------------------
 PeerOrgs:
-  - Name: Bogota
-    Domain: bogota.laboratories.com
+  - Name: LaboratoryA
+    Domain: laboratoryA.laboratories.com
     EnableNodeOUs: true
     Template:
       Count: 1
