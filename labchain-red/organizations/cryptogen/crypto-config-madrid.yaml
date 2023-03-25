@@ -3,7 +3,7 @@
 # ---------------------------------------------------------------------------
 PeerOrgs:
   - Name: Madrid
-    Domain: madrid.universidades.com
+    Domain: madrid.laboratories.com
     EnableNodeOUs: true
     Template:
       Count: 1

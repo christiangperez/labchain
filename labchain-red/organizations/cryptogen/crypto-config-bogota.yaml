@@ -3,7 +3,7 @@
 # ---------------------------------------------------------------------------
 PeerOrgs:
   - Name: Bogota
-    Domain: bogota.universidades.com
+    Domain: bogota.laboratories.com
     EnableNodeOUs: true
     Template:
       Count: 1

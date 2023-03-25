@@ -2,9 +2,9 @@
 
 function createMadrid() {
   infoln "Enrolling the CA admin"
-  mkdir -p organizations/peerOrganizations/madrid.universidades.com/
+  mkdir -p organizations/peerOrganizations/madrid.laboratories.com/
 
-  export FABRIC_CA_CLIENT_HOME=${PWD}/organizations/peerOrganizations/madrid.universidades.com/
+  export FABRIC_CA_CLIENT_HOME=${PWD}/organizations/peerOrganizations/madrid.laboratories.com/
 
   set -x
   fabric-ca-client enroll -u https://admin:adminpw@localhost:7054 --caname ca-madrid --tls.certfiles "${PWD}/organizations/fabric-ca/madrid/tls-cert.pem"
@@ -23,7 +23,7 @@ function createMadrid() {
     OrganizationalUnitIdentifier: admin
   OrdererOUIdentifier:
     Certificate: cacerts/localhost-7054-ca-madrid.pem
-    OrganizationalUnitIdentifier: orderer' > "${PWD}/organizations/peerOrganizations/madrid.universidades.com/msp/config.yaml"
+    OrganizationalUnitIdentifier: orderer' > "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/msp/config.yaml"
 
   infoln "Registering peer0"
   set -x
@@ -42,49 +42,49 @@ function createMadrid() {
 
   infoln "Generating the peer0 msp"
   set -x
-  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:7054 --caname ca-madrid -M "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/msp" --csr.hosts peer0.madrid.universidades.com --tls.certfiles "${PWD}/organizations/fabric-ca/madrid/tls-cert.pem"
+  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:7054 --caname ca-madrid -M "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/msp" --csr.hosts peer0.madrid.laboratories.com --tls.certfiles "${PWD}/organizations/fabric-ca/madrid/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/organizations/peerOrganizations/madrid.universidades.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/msp/config.yaml"
+  cp "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/msp/config.yaml"
 
   infoln "Generating the peer0-tls certificates"
   set -x
-  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:7054 --caname ca-madrid -M "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/tls" --enrollment.profile tls --csr.hosts peer0.madrid.universidades.com --csr.hosts localhost --tls.certfiles "${PWD}/organizations/fabric-ca/madrid/tls-cert.pem"
+  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:7054 --caname ca-madrid -M "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/tls" --enrollment.profile tls --csr.hosts peer0.madrid.laboratories.com --csr.hosts localhost --tls.certfiles "${PWD}/organizations/fabric-ca/madrid/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/tls/ca.crt"
-  cp "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/tls/signcerts/"* "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/tls/server.crt"
-  cp "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/tls/keystore/"* "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/tls/server.key"
+  cp "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/tls/ca.crt"
+  cp "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/tls/signcerts/"* "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/tls/server.crt"
+  cp "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/tls/keystore/"* "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/tls/server.key"
 
-  mkdir -p "${PWD}/organizations/peerOrganizations/madrid.universidades.com/msp/tlscacerts"
-  cp "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/madrid.universidades.com/msp/tlscacerts/ca.crt"
+  mkdir -p "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/msp/tlscacerts"
+  cp "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/msp/tlscacerts/ca.crt"
 
-  mkdir -p "${PWD}/organizations/peerOrganizations/madrid.universidades.com/tlsca"
-  cp "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/madrid.universidades.com/tlsca/tlsca.madrid.universidades.com-cert.pem"
+  mkdir -p "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/tlsca"
+  cp "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/tlsca/tlsca.madrid.laboratories.com-cert.pem"
 
-  mkdir -p "${PWD}/organizations/peerOrganizations/madrid.universidades.com/ca"
-  cp "${PWD}/organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/msp/cacerts/"* "${PWD}/organizations/peerOrganizations/madrid.universidades.com/ca/ca.madrid.universidades.com-cert.pem"
+  mkdir -p "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/ca"
+  cp "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/msp/cacerts/"* "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/ca/ca.madrid.laboratories.com-cert.pem"
 
   infoln "Generating the user msp"
   set -x
-  fabric-ca-client enroll -u https://user1:user1pw@localhost:7054 --caname ca-madrid -M "${PWD}/organizations/peerOrganizations/madrid.universidades.com/users/User1@madrid.universidades.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/madrid/tls-cert.pem"
+  fabric-ca-client enroll -u https://user1:user1pw@localhost:7054 --caname ca-madrid -M "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/users/User1@madrid.laboratories.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/madrid/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/organizations/peerOrganizations/madrid.universidades.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/madrid.universidades.com/users/User1@madrid.universidades.com/msp/config.yaml"
+  cp "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/users/User1@madrid.laboratories.com/msp/config.yaml"
 
   infoln "Generating the org admin msp"
   set -x
-  fabric-ca-client enroll -u https://madridadmin:madridadminpw@localhost:7054 --caname ca-madrid -M "${PWD}/organizations/peerOrganizations/madrid.universidades.com/users/Admin@madrid.universidades.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/madrid/tls-cert.pem"
+  fabric-ca-client enroll -u https://madridadmin:madridadminpw@localhost:7054 --caname ca-madrid -M "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/users/Admin@madrid.laboratories.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/madrid/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/organizations/peerOrganizations/madrid.universidades.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/madrid.universidades.com/users/Admin@madrid.universidades.com/msp/config.yaml"
+  cp "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/madrid.laboratories.com/users/Admin@madrid.laboratories.com/msp/config.yaml"
 }
 
 function createBogota() {
   infoln "Enrolling the CA admin"
-  mkdir -p organizations/peerOrganizations/bogota.universidades.com/
+  mkdir -p organizations/peerOrganizations/bogota.laboratories.com/
 
-  export FABRIC_CA_CLIENT_HOME=${PWD}/organizations/peerOrganizations/bogota.universidades.com/
+  export FABRIC_CA_CLIENT_HOME=${PWD}/organizations/peerOrganizations/bogota.laboratories.com/
 
   set -x
   fabric-ca-client enroll -u https://admin:adminpw@localhost:8054 --caname ca-bogota --tls.certfiles "${PWD}/organizations/fabric-ca/bogota/tls-cert.pem"
@@ -103,7 +103,7 @@ function createBogota() {
     OrganizationalUnitIdentifier: admin
   OrdererOUIdentifier:
     Certificate: cacerts/localhost-8054-ca-bogota.pem
-    OrganizationalUnitIdentifier: orderer' > "${PWD}/organizations/peerOrganizations/bogota.universidades.com/msp/config.yaml"
+    OrganizationalUnitIdentifier: orderer' > "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/msp/config.yaml"
 
   infoln "Registering peer0"
   set -x
@@ -122,49 +122,49 @@ function createBogota() {
 
   infoln "Generating the peer0 msp"
   set -x
-  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:8054 --caname ca-bogota -M "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/msp" --csr.hosts peer0.bogota.universidades.com --tls.certfiles "${PWD}/organizations/fabric-ca/bogota/tls-cert.pem"
+  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:8054 --caname ca-bogota -M "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/msp" --csr.hosts peer0.bogota.laboratories.com --tls.certfiles "${PWD}/organizations/fabric-ca/bogota/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/organizations/peerOrganizations/bogota.universidades.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/msp/config.yaml"
+  cp "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/msp/config.yaml"
 
   infoln "Generating the peer0-tls certificates"
   set -x
-  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:8054 --caname ca-bogota -M "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/tls" --enrollment.profile tls --csr.hosts peer0.bogota.universidades.com --csr.hosts localhost --tls.certfiles "${PWD}/organizations/fabric-ca/bogota/tls-cert.pem"
+  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:8054 --caname ca-bogota -M "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/tls" --enrollment.profile tls --csr.hosts peer0.bogota.laboratories.com --csr.hosts localhost --tls.certfiles "${PWD}/organizations/fabric-ca/bogota/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/tls/ca.crt"
-  cp "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/tls/signcerts/"* "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/tls/server.crt"
-  cp "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/tls/keystore/"* "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/tls/server.key"
+  cp "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/tls/ca.crt"
+  cp "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/tls/signcerts/"* "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/tls/server.crt"
+  cp "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/tls/keystore/"* "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/tls/server.key"
 
-  mkdir -p "${PWD}/organizations/peerOrganizations/bogota.universidades.com/msp/tlscacerts"
-  cp "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/bogota.universidades.com/msp/tlscacerts/ca.crt"
+  mkdir -p "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/msp/tlscacerts"
+  cp "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/msp/tlscacerts/ca.crt"
 
-  mkdir -p "${PWD}/organizations/peerOrganizations/bogota.universidades.com/tlsca"
-  cp "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/bogota.universidades.com/tlsca/tlsca.bogota.universidades.com-cert.pem"
+  mkdir -p "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/tlsca"
+  cp "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/tls/tlscacerts/"* "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/tlsca/tlsca.bogota.laboratories.com-cert.pem"
 
-  mkdir -p "${PWD}/organizations/peerOrganizations/bogota.universidades.com/ca"
-  cp "${PWD}/organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/msp/cacerts/"* "${PWD}/organizations/peerOrganizations/bogota.universidades.com/ca/ca.bogota.universidades.com-cert.pem"
+  mkdir -p "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/ca"
+  cp "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/msp/cacerts/"* "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/ca/ca.bogota.laboratories.com-cert.pem"
 
   infoln "Generating the user msp"
   set -x
-  fabric-ca-client enroll -u https://user1:user1pw@localhost:8054 --caname ca-bogota -M "${PWD}/organizations/peerOrganizations/bogota.universidades.com/users/User1@bogota.universidades.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/bogota/tls-cert.pem"
+  fabric-ca-client enroll -u https://user1:user1pw@localhost:8054 --caname ca-bogota -M "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/users/User1@bogota.laboratories.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/bogota/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/organizations/peerOrganizations/bogota.universidades.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/bogota.universidades.com/users/User1@bogota.universidades.com/msp/config.yaml"
+  cp "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/users/User1@bogota.laboratories.com/msp/config.yaml"
 
   infoln "Generating the org admin msp"
   set -x
-  fabric-ca-client enroll -u https://bogotaadmin:bogotaadminpw@localhost:8054 --caname ca-bogota -M "${PWD}/organizations/peerOrganizations/bogota.universidades.com/users/Admin@bogota.universidades.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/bogota/tls-cert.pem"
+  fabric-ca-client enroll -u https://bogotaadmin:bogotaadminpw@localhost:8054 --caname ca-bogota -M "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/users/Admin@bogota.laboratories.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/bogota/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/organizations/peerOrganizations/bogota.universidades.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/bogota.universidades.com/users/Admin@bogota.universidades.com/msp/config.yaml"
+  cp "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/bogota.laboratories.com/users/Admin@bogota.laboratories.com/msp/config.yaml"
 }
 
 function createOrderer() {
   infoln "Enrolling the CA admin"
-  mkdir -p organizations/ordererOrganizations/universidades.com
+  mkdir -p organizations/ordererOrganizations/laboratories.com
 
-  export FABRIC_CA_CLIENT_HOME=${PWD}/organizations/ordererOrganizations/universidades.com
+  export FABRIC_CA_CLIENT_HOME=${PWD}/organizations/ordererOrganizations/laboratories.com
 
   set -x
   fabric-ca-client enroll -u https://admin:adminpw@localhost:9054 --caname ca-orderer --tls.certfiles "${PWD}/organizations/fabric-ca/ordererOrg/tls-cert.pem"
@@ -183,7 +183,7 @@ function createOrderer() {
     OrganizationalUnitIdentifier: admin
   OrdererOUIdentifier:
     Certificate: cacerts/localhost-9054-ca-orderer.pem
-    OrganizationalUnitIdentifier: orderer' > "${PWD}/organizations/ordererOrganizations/universidades.com/msp/config.yaml"
+    OrganizationalUnitIdentifier: orderer' > "${PWD}/organizations/ordererOrganizations/laboratories.com/msp/config.yaml"
 
   infoln "Registering orderer"
   set -x
@@ -197,30 +197,30 @@ function createOrderer() {
 
   infoln "Generating the orderer msp"
   set -x
-  fabric-ca-client enroll -u https://orderer:ordererpw@localhost:9054 --caname ca-orderer -M "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/msp" --csr.hosts orderer.universidades.com --csr.hosts localhost --tls.certfiles "${PWD}/organizations/fabric-ca/ordererOrg/tls-cert.pem"
+  fabric-ca-client enroll -u https://orderer:ordererpw@localhost:9054 --caname ca-orderer -M "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/msp" --csr.hosts orderer.laboratories.com --csr.hosts localhost --tls.certfiles "${PWD}/organizations/fabric-ca/ordererOrg/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/organizations/ordererOrganizations/universidades.com/msp/config.yaml" "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/msp/config.yaml"
+  cp "${PWD}/organizations/ordererOrganizations/laboratories.com/msp/config.yaml" "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/msp/config.yaml"
 
   infoln "Generating the orderer-tls certificates"
   set -x
-  fabric-ca-client enroll -u https://orderer:ordererpw@localhost:9054 --caname ca-orderer -M "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls" --enrollment.profile tls --csr.hosts orderer.universidades.com --csr.hosts localhost --tls.certfiles "${PWD}/organizations/fabric-ca/ordererOrg/tls-cert.pem"
+  fabric-ca-client enroll -u https://orderer:ordererpw@localhost:9054 --caname ca-orderer -M "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls" --enrollment.profile tls --csr.hosts orderer.laboratories.com --csr.hosts localhost --tls.certfiles "${PWD}/organizations/fabric-ca/ordererOrg/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls/tlscacerts/"* "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls/ca.crt"
-  cp "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls/signcerts/"* "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls/server.crt"
-  cp "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls/keystore/"* "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls/server.key"
+  cp "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls/tlscacerts/"* "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls/ca.crt"
+  cp "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls/signcerts/"* "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls/server.crt"
+  cp "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls/keystore/"* "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls/server.key"
 
-  mkdir -p "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/msp/tlscacerts"
-  cp "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls/tlscacerts/"* "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/msp/tlscacerts/tlsca.universidades.com-cert.pem"
+  mkdir -p "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/msp/tlscacerts"
+  cp "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls/tlscacerts/"* "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/msp/tlscacerts/tlsca.laboratories.com-cert.pem"
 
-  mkdir -p "${PWD}/organizations/ordererOrganizations/universidades.com/msp/tlscacerts"
-  cp "${PWD}/organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls/tlscacerts/"* "${PWD}/organizations/ordererOrganizations/universidades.com/msp/tlscacerts/tlsca.universidades.com-cert.pem"
+  mkdir -p "${PWD}/organizations/ordererOrganizations/laboratories.com/msp/tlscacerts"
+  cp "${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls/tlscacerts/"* "${PWD}/organizations/ordererOrganizations/laboratories.com/msp/tlscacerts/tlsca.laboratories.com-cert.pem"
 
   infoln "Generating the admin msp"
   set -x
-  fabric-ca-client enroll -u https://ordererAdmin:ordererAdminpw@localhost:9054 --caname ca-orderer -M "${PWD}/organizations/ordererOrganizations/universidades.com/users/Admin@universidades.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/ordererOrg/tls-cert.pem"
+  fabric-ca-client enroll -u https://ordererAdmin:ordererAdminpw@localhost:9054 --caname ca-orderer -M "${PWD}/organizations/ordererOrganizations/laboratories.com/users/Admin@laboratories.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/ordererOrg/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/organizations/ordererOrganizations/universidades.com/msp/config.yaml" "${PWD}/organizations/ordererOrganizations/universidades.com/users/Admin@universidades.com/msp/config.yaml"
+  cp "${PWD}/organizations/ordererOrganizations/laboratories.com/msp/config.yaml" "${PWD}/organizations/ordererOrganizations/laboratories.com/users/Admin@laboratories.com/msp/config.yaml"
 }

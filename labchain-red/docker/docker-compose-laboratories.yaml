@@ -1,18 +1,18 @@
 version: '3.7'
 
 volumes:
-  orderer.universidades.com:
-  peer0.madrid.universidades.com:
-  peer0.bogota.universidades.com:
+  orderer.laboratories.com:
+  peer0.madrid.laboratories.com:
+  peer0.bogota.laboratories.com:
 
 networks:
   test:
-    name: universidades_network
+    name: laboratories_network
 
 services:
 
-  orderer.universidades.com:
-    container_name: orderer.universidades.com
+  orderer.laboratories.com:
+    container_name: orderer.laboratories.com
     image: hyperledger/fabric-orderer:2.3.3
     labels:
       service: hyperledger-fabric
@@ -42,9 +42,9 @@ services:
     command: orderer
     volumes:
         - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-        - ../organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/msp:/var/hyperledger/orderer/msp
-        - ../organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls/:/var/hyperledger/orderer/tls
-        - orderer.universidades.com:/var/hyperledger/production/orderer
+        - ../organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/msp:/var/hyperledger/orderer/msp
+        - ../organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls/:/var/hyperledger/orderer/tls
+        - orderer.laboratories.com:/var/hyperledger/production/orderer
     ports:
       - 7050:7050
       - 7053:7053
@@ -65,27 +65,27 @@ services:
     networks:
       - test
 
-  peer0.madrid.universidades.com:
-    container_name: peer0.madrid.universidades.com
+  peer0.madrid.laboratories.com:
+    container_name: peer0.madrid.laboratories.com
     image: hyperledger/fabric-peer:2.3.3
     labels:
       service: hyperledger-fabric
     environment:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=universidades_network
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=laboratories_network
       - FABRIC_LOGGING_SPEC=INFO
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_PROFILE_ENABLED=false
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-      - CORE_PEER_ID=peer0.madrid.universidades.com
-      - CORE_PEER_ADDRESS=peer0.madrid.universidades.com:7051
+      - CORE_PEER_ID=peer0.madrid.laboratories.com
+      - CORE_PEER_ADDRESS=peer0.madrid.laboratories.com:7051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.madrid.universidades.com:7052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.madrid.laboratories.com:7052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.madrid.universidades.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.madrid.universidades.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.madrid.laboratories.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.madrid.laboratories.com:7051
       - CORE_PEER_LOCALMSPID=MadridMSP
       - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:17051
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
@@ -94,9 +94,9 @@ services:
       - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw
     volumes:
         - /var/run/docker.sock:/host/var/run/docker.sock
-        - ../organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/msp:/etc/hyperledger/fabric/msp
-        - ../organizations/peerOrganizations/madrid.universidades.com/peers/peer0.madrid.universidades.com/tls:/etc/hyperledger/fabric/tls
-        - peer0.madrid.universidades.com:/var/hyperledger/production
+        - ../organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/msp:/etc/hyperledger/fabric/msp
+        - ../organizations/peerOrganizations/madrid.laboratories.com/peers/peer0.madrid.laboratories.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.madrid.laboratories.com:/var/hyperledger/production
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
@@ -120,27 +120,27 @@ services:
     networks:
       - test
 
-  peer0.bogota.universidades.com:
-    container_name: peer0.bogota.universidades.com
+  peer0.bogota.laboratories.com:
+    container_name: peer0.bogota.laboratories.com
     image: hyperledger/fabric-peer:2.3.3
     labels:
       service: hyperledger-fabric
     environment:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=universidades_network
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=laboratories_network
       - FABRIC_LOGGING_SPEC=INFO
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_PROFILE_ENABLED=false
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-      - CORE_PEER_ID=peer0.bogota.universidades.com
-      - CORE_PEER_ADDRESS=peer0.bogota.universidades.com:9051
+      - CORE_PEER_ID=peer0.bogota.laboratories.com
+      - CORE_PEER_ADDRESS=peer0.bogota.laboratories.com:9051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.bogota.universidades.com:9052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.bogota.laboratories.com:9052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:9052
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bogota.universidades.com:9051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.bogota.universidades.com:9051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bogota.laboratories.com:9051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.bogota.laboratories.com:9051
       - CORE_PEER_LOCALMSPID=BogotaMSP
       - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:19051
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
@@ -149,9 +149,9 @@ services:
       - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw
     volumes:
         - /var/run/docker.sock:/host/var/run/docker.sock
-        - ../organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/msp:/etc/hyperledger/fabric/msp
-        - ../organizations/peerOrganizations/bogota.universidades.com/peers/peer0.bogota.universidades.com/tls:/etc/hyperledger/fabric/tls
-        - peer0.bogota.universidades.com:/var/hyperledger/production
+        - ../organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/msp:/etc/hyperledger/fabric/msp
+        - ../organizations/peerOrganizations/bogota.laboratories.com/peers/peer0.bogota.laboratories.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bogota.laboratories.com:/var/hyperledger/production
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
@@ -178,7 +178,7 @@ services:
     volumes:
         - ../organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations
     depends_on:
-      - peer0.madrid.universidades.com
-      - peer0.bogota.universidades.com
+      - peer0.madrid.laboratories.com
+      - peer0.bogota.laboratories.com
     networks:
       - test

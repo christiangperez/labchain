@@ -3,7 +3,7 @@
 # ---------------------------------------------------------------------------
 OrdererOrgs:
   - Name: Orderer
-    Domain: universidades.com
+    Domain: laboratories.com
     EnableNodeOUs: true
     Specs:
       - Hostname: orderer

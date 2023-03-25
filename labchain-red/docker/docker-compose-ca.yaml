@@ -2,7 +2,7 @@ version: '3.7'
 
 networks:
   test:
-    name: universidades_network
+    name: laboratories_network
 
 services:
 

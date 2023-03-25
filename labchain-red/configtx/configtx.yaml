@@ -7,7 +7,7 @@ Organizations:
     - &OrdererOrg
         Name: OrdererOrg
         ID: OrdererMSP
-        MSPDir: ../organizations/ordererOrganizations/universidades.com/msp
+        MSPDir: ../organizations/ordererOrganizations/laboratories.com/msp
         Policies:
             Readers:
                 Type: Signature
@@ -20,13 +20,13 @@ Organizations:
                 Rule: "OR('OrdererMSP.admin')"
 
         OrdererEndpoints:
-            - orderer.universidades.com:7050
+            - orderer.laboratories.com:7050
 
     - &Madrid
         Name: MadridMSP
         ID: MadridMSP
 
-        MSPDir: ../organizations/peerOrganizations/madrid.universidades.com/msp
+        MSPDir: ../organizations/peerOrganizations/madrid.laboratories.com/msp
         Policies:
             Readers:
                 Type: Signature
@@ -45,7 +45,7 @@ Organizations:
         Name: BogotaMSP
         ID: BogotaMSP
 
-        MSPDir: ../organizations/peerOrganizations/bogota.universidades.com/msp
+        MSPDir: ../organizations/peerOrganizations/bogota.laboratories.com/msp
         Policies:
             Readers:
                 Type: Signature
@@ -101,13 +101,13 @@ Application: &ApplicationDefaults
 Orderer: &OrdererDefaults
     OrdererType: etcdraft
     Addresses:
-        - orderer.universidades.com:7050
+        - orderer.laboratories.com:7050
     EtcdRaft:
         Consenters:
-        - Host: orderer.universidades.com
+        - Host: orderer.laboratories.com
           Port: 7050
-          ClientTLSCert: ../organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls/server.crt
-          ServerTLSCert: ../organizations/ordererOrganizations/universidades.com/orderers/orderer.universidades.com/tls/server.crt
+          ClientTLSCert: ../organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls/server.crt
+          ServerTLSCert: ../organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/tls/server.crt
 
     BatchTimeout: 2s
     BatchSize:
@@ -151,7 +151,7 @@ Channel: &ChannelDefaults
 ################################################################################
 Profiles:
 
-    UniversidadesGenesis:
+    LaboratoriesGenesis:
         <<: *ChannelDefaults
         Orderer:
             <<: *OrdererDefaults
