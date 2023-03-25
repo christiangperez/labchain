@@ -1,1 +1,1 @@
-# labchain
+# labchain hyperledger project
