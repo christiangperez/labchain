@@ -77,7 +77,7 @@ function installChaincode() {
   export CORE_PEER_ADDRESS=localhost:9051
   peer lifecycle chaincode install basic.tar.gz
   peer lifecycle chaincode queryinstalled
-  export CC_PACKAGE_ID=basic_1.0:42ec06cd56ec32a153af3d335b1a18e7ec3dae039b96698f933f464e7abf2a3e
+  export CC_PACKAGE_ID=basic_1.0:ff3e05e59e73050096b31660d895bbb7f42eb44b9ed9309449bb5c5353e2a9d8
   peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.laboratories.com --channelID laboratorieschannel --name basic --version 1.0 --package-id $CC_PACKAGE_ID --sequence 1 --tls --cafile ${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/msp/tlscacerts/tlsca.laboratories.com-cert.pem
   export PEER0_GOVERNMENT_CA=${PWD}/organizations/peerOrganizations/government.laboratories.com/peers/peer0.government.laboratories.com/tls/ca.crt
   export CORE_PEER_LOCALMSPID="GovernmentMSP"
@@ -90,17 +90,35 @@ function installChaincode() {
   peer lifecycle chaincode querycommitted --channelID laboratorieschannel --name basic --cafile ${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/msp/tlscacerts/tlsca.laboratories.com-cert.pem
 }
 
-function chaincodeInvoke() {
+function InvokeCreateOrder() {
+  export PEER0_LABORATORYA_CA=${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/peers/peer0.laboratoryA.laboratories.com/tls/ca.crt
+  export CORE_PEER_LOCALMSPID="LaboratoryAMSP"
+  export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_LABORATORYA_CA
+  export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/users/Admin@laboratoryA.laboratories.com/msp
+  export CORE_PEER_ADDRESS=localhost:9051
+  peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.laboratories.com --tls --cafile ${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/msp/tlscacerts/tlsca.laboratories.com-cert.pem -C laboratorieschannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/government.laboratories.com/peers/peer0.government.laboratories.com/tls/ca.crt --peerAddresses localhost:9051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/peers/peer0.laboratoryA.laboratories.com/tls/ca.crt -c '{"function":"RegisterOrder","Args":["1","2023-01-01","31464386","Christian Perez","M","123","1050","2023-01-01","Classic exam","1000"]}'
+}
+
+function InvokeGetOrderById() {
   export PEER0_GOVERNMENT_CA=${PWD}/organizations/peerOrganizations/government.laboratories.com/peers/peer0.government.laboratories.com/tls/ca.crt
   export CORE_PEER_LOCALMSPID="GovernmentMSP"
   export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_GOVERNMENT_CA
   export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/government.laboratories.com/users/Admin@government.laboratories.com/msp
   export CORE_PEER_ADDRESS=localhost:7051
-  peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.laboratories.com --tls --cafile ${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/msp/tlscacerts/tlsca.laboratories.com-cert.pem -C laboratorieschannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/government.laboratories.com/peers/peer0.government.laboratories.com/tls/ca.crt --peerAddresses localhost:9051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/peers/peer0.laboratoryA.laboratories.com/tls/ca.crt -c '{"function":"InitLedger","Args":[]}'
+  peer chaincode query -C laboratorieschannel -n basic -c '{"function":"GetOrderById","Args":["1"]}'
 }
 
-function chaincodeQuery() {
-  peer chaincode query -C laboratorieschannel -n basic -c '{"Args":["GetAllAssets"]}'
+function QueryGetAllOrders() {
+  peer chaincode query -C laboratorieschannel -n basic -c '{"Args":["GetAllOrders"]}'
+}
+function startAll() {
+  startCA
+  sleep 10
+  enrollAndRegister
+  sleep 10
+  networkUp
+  sleep 15
+  createAndJoinChannel
 }
 
 function println() {
@@ -123,8 +141,9 @@ function printHelp() {
     println "    create-and-join-channel            - Create and join in channel"
     println "    install-dependencies-for-chaincode - Install the dependencies for Javascript chaincode (node_modules)"
     println "    install-chaincode                  - Install chaincode"
-    println "    chaincode-invoke                   - Invoke init method of the chaincode"
-    println "    chaincode-query                    - Invoke GetAllAssets method of the chaincode"
+    println "    invoke-create-order                - Invoke CreateOrder method of the chaincode"
+    println "    invoke-get-order-by-id             - Invoke GetOrderById method of the chaincode"
+    println "    query-get-all-orders               - Query GetAllOrders method of the chaincode"
 }
 
 # Parse Flags
@@ -158,12 +177,18 @@ elif [ "${MODE}" == "install-dependencies-for-chaincode" ]; then
 elif [ "${MODE}" == "install-chaincode" ]; then
   infoln "Installing Chaincode"
   installChaincode
-elif [ "${MODE}" == "chaincode-invoke" ]; then
-  infoln "Invoking Chaincode method InitLedger"
-  chaincodeInvoke
-elif [ "${MODE}" == "chaincode-query" ]; then
-  infoln "Invoking Chaincode method GetAllAssets"
-  chaincodeQuery
+elif [ "${MODE}" == "invoke-create-order" ]; then
+  infoln "Invoking Chaincode method CreateOrder"
+  InvokeCreateOrder
+elif [ "${MODE}" == "invoke-get-order-by-id" ]; then
+  infoln "Invoking Chaincode method GetOrderById"
+  InvokeGetOrderById
+elif [ "${MODE}" == "query-get-all-orders" ]; then
+  infoln "Query Chaincode method GetAllOrders"
+  QueryGetAllOrders
+elif [ "${MODE}" == "start-all" ]; then
+  infoln "Starting all network commands"
+  startAll
 else
   infoln "Invalid flag"
   printHelp

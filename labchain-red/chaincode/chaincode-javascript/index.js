@@ -6,7 +6,7 @@
 
 'use strict';
 
-const assetTransfer = require('./lib/assetTransfer');
+const assetLaboratory = require('./lib/assetLaboratory');
 
-module.exports.AssetTransfer = assetTransfer;
-module.exports.contracts = [assetTransfer];
+module.exports.AssetLaboratory = assetLaboratory;
+module.exports.contracts = [assetLaboratory];
