@@ -100,15 +100,20 @@ function InvokeCreateOrder() {
 }
 
 function InvokeGetOrderById() {
-  export PEER0_GOVERNMENT_CA=${PWD}/organizations/peerOrganizations/government.laboratories.com/peers/peer0.government.laboratories.com/tls/ca.crt
-  export CORE_PEER_LOCALMSPID="GovernmentMSP"
-  export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_GOVERNMENT_CA
-  export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/government.laboratories.com/users/Admin@government.laboratories.com/msp
-  export CORE_PEER_ADDRESS=localhost:7051
+  export PEER0_LABORATORYA_CA=${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/peers/peer0.laboratoryA.laboratories.com/tls/ca.crt
+  export CORE_PEER_LOCALMSPID="LaboratoryAMSP"
+  export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_LABORATORYA_CA
+  export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/users/Admin@laboratoryA.laboratories.com/msp
+  export CORE_PEER_ADDRESS=localhost:9051
   peer chaincode query -C laboratorieschannel -n basic -c '{"function":"GetOrderById","Args":["1"]}'
 }
 
 function QueryGetAllOrders() {
+  export PEER0_LABORATORYA_CA=${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/peers/peer0.laboratoryA.laboratories.com/tls/ca.crt
+  export CORE_PEER_LOCALMSPID="LaboratoryAMSP"
+  export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_LABORATORYA_CA
+  export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/users/Admin@laboratoryA.laboratories.com/msp
+  export CORE_PEER_ADDRESS=localhost:9051
   peer chaincode query -C laboratorieschannel -n basic -c '{"Args":["GetAllOrders"]}'
 }
 function startAll() {

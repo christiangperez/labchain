@@ -6,11 +6,6 @@ Tener en la raiz la carpeta labchain con todas sus subcarpetas necesarias
 
 Ejecutar los siguientes comandos de a uno
 
-cd ~/labchain/labchain-red
-./network.sh down
-
-Revisar que no haya quedado ningun volumen de docker
-
 ./network.sh up-ca
 ./network.sh enroll-and-register
 ./network.sh up-laboratories
@@ -19,3 +14,7 @@ Revisar que no haya quedado ningun volumen de docker
 ./network.sh install-chaincode
 ./network.sh invoke-create-order
 ./network.sh query-get-all-orders
+
+Si queremos eliminar la red para volver a montarla nuevamente usar el siguiente comando:
+./network.sh down
+Revisar que no haya quedado ningun volumen de docker
