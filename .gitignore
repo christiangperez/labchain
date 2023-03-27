@@ -1,5 +1,6 @@
 /labchain-red/chaincode/chaincode-javascript/node_modules
 /api/node_modules
+/frontal/build
 /frontal/node_modules
 
 .DS_Store
