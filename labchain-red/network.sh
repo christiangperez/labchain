@@ -26,6 +26,10 @@ function enrollAndRegister() {
   . ./organizations/fabric-ca/registerEnroll.sh && createOrderer
 }
 
+function generateCpp() {
+  ./cpp-generate.sh
+}
+
 function networkUp() {
   docker-compose -f docker/docker-compose-laboratories.yaml up -d
 }
@@ -121,6 +125,8 @@ function startAll() {
   sleep 10
   enrollAndRegister
   sleep 10
+  generateCpp
+  sleep 5
   networkUp
   sleep 15
   createAndJoinChannel
@@ -142,6 +148,7 @@ function printHelp() {
     println "    down                               - Shut down network and remove unnecessary files"
     println "    up-ca                              - Start dockers for the CAs"
     println "    enroll-and-register                - Enroll and register with the CA"
+    println "    generate-cpp                       - Generate CPP files"
     println "    up-laboratories                    - Start network"
     println "    create-and-join-channel            - Create and join in channel"
     println "    install-dependencies-for-chaincode - Install the dependencies for Javascript chaincode (node_modules)"
@@ -170,6 +177,9 @@ elif [ "${MODE}" == "up-ca" ]; then
 elif [ "${MODE}" == "enroll-and-register" ]; then
   infoln "Enrolling and registering"
   enrollAndRegister
+elif [ "${MODE}" == "generate-cpp" ]; then
+  infoln "Generating CPPs"
+  generateCpp
 elif [ "${MODE}" == "up-laboratories" ]; then
   infoln "Starting laboratories network"
   networkUp
