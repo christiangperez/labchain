@@ -20,6 +20,14 @@ cd ~/labchain/labchain-red
 ./network.sh api-up
 ./network.sh frontal-up
 
+-- Explorer
+Sobre el archivo ~/labchain/labchain-red/connection-profile/laboratories-network.json, poner el nombre de archivo que se encuentra en:
+~/labchain/labchain-red/organizations/peerOrganizations/laboratoryA.laboratories.com/users/User1@laboratoryA.laboratories.com/msp/keystore
+sobre el campo organizations/LaboratoryAMSP/adminPrivateKey/path
+
+cd ~/labchain/labchain-red
+docker-compose up -d
+
 Si queremos eliminar la red para volver a montarla nuevamente usar el siguiente comando:
 ./network.sh down
 Revisar que no haya quedado ningun volumen de docker

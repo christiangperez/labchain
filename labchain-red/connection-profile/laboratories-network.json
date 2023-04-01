@@ -1,0 +1,48 @@
+{
+	"name": "laboratories-network",
+	"version": "1.0.0",
+	"client": {
+		"tlsEnable": true,
+		"adminCredential": {
+			"id": "exploreradmin",
+			"password": "exploreradminpw"
+		},
+		"enableAuthentication": true,
+		"organization": "LaboratoryAMSP",
+		"connection": {
+			"timeout": {
+				"peer": {
+					"endorser": "300"
+				},
+				"orderer": "300"
+			}
+		}
+	},
+	"channels": {
+		"laboratorieschannel": {
+			"peers": {
+				"peer0.laboratoryA.laboratories.com": {}
+			}
+		}
+	},
+	"organizations": {
+		"LaboratoryAMSP": {
+			"mspid": "LaboratoryAMSP",
+			"adminPrivateKey": {
+				"path": "/tmp/crypto/peerOrganizations/laboratoryA.laboratories.com/users/User1@laboratoryA.laboratories.com/msp/keystore/d17169f801b7c486e69c52689a836b7165b2fcbb30002ac9f7c95b3035eddff3_sk"
+			},
+			"peers": ["peer0.laboratoryA.laboratories.com"],
+			"signedCert": {
+				"path": "/tmp/crypto/peerOrganizations/laboratoryA.laboratories.com/users/User1@laboratoryA.laboratories.com/msp/signcerts/cert.pem"
+			}
+		}
+	},
+	"peers": {
+		"peer0.laboratoryA.laboratories.com": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/laboratoryA.laboratories.com/peers/peer0.laboratoryA.laboratories.com/tls/ca.crt"
+			},
+			"url": "grpcs://peer0.laboratoryA.laboratories.com:9051"
+		}
+	}
+}

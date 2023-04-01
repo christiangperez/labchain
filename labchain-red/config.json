@@ -1,0 +1,9 @@
+{
+	"network-configs": {
+		"laboratories-network": {
+			"name": "Laboratories Network",
+			"profile": "./connection-profile/laboratories-network.json"
+		}
+	},
+	"license": "Apache-2.0"
+}
