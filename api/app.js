@@ -128,7 +128,7 @@ app.post("/register-order", async (req = express.request, res = express.response
         prescriptionDescription,
         totalPrice } = body;
 
-			result = await contract.submitTransaction('RegisterOrder', uuidv4(), date, dniPatient,namePatient, sexPatient, codAna, matProfessional, prescriptionDate, prescriptionDescription, totalPrice);
+			result = await contract.submitTransaction('RegisterOrder', uuidv4(), date, dniPatient, namePatient, sexPatient, codAna, matProfessional, prescriptionDate, prescriptionDescription, totalPrice);
 
       return res.status(200).json();
 
