@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Orders } from '../interfaces';
+import './ListOrders.css';
 
 export const ListOrders = () => {
   const navigate = useNavigate();
@@ -25,17 +26,16 @@ export const ListOrders = () => {
   }, []);
 
   return (
-    <div>
-      <div>Orders</div>
+    <div className="list-container">
       {orders &&
         orders.map((order) => (
-          <div key={order.Key}>
-            <div>Id Orden: {order.Key}</div>
-            <div>Dni Patient: {order.Record.DniPatient}</div>
-            <div>Name Patient: {order.Record.NamePatient}</div>
-            <div>Prescription: {order.Record.PrescriptionDate}</div>
-            <div>Total Price: {order.Record.TotalPrice}</div>
-            <button onClick={handleClickViewDetail}>View Detail</button>
+          <div className="list-orders" key={order.Key}>
+            <div>Id Orden: <b>{order.Key}</b></div>
+            <div>Dni Patient: <b>{order.Record.DniPatient}</b></div>
+            <div>Name Patient: <b>{order.Record.NamePatient}</b></div>
+            <div>Prescription: <b>{order.Record.PrescriptionDate}</b></div>
+            <div>Total Price: <b>{order.Record.TotalPrice}</b></div>
+            <button className="list-viewdetail" onClick={handleClickViewDetail}>View Detail</button>
           </div>
         ))}
     </div>

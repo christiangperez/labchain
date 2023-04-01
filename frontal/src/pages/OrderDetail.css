@@ -1,0 +1,15 @@
+.detail-container {
+    margin-top: 30px;
+}
+
+.detail-data {
+    padding: 0 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.detail-orderid {
+    padding-bottom: 20px;
+}

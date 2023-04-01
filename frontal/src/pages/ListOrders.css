@@ -1,0 +1,16 @@
+.list-container {
+    margin-top: 50px;
+}
+
+.list-orders {
+    padding: 20px;
+}
+
+.list-viewdetail {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgb(7, 8, 65);
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}

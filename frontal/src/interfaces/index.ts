@@ -15,7 +15,7 @@ export interface Orders {
 }
 
 export interface Order {
-  Id: string;
+  ID: string;
   Date: string;
   DniPatient: string;
   NamePatient: string;

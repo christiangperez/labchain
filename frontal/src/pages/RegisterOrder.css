@@ -1,0 +1,32 @@
+.register-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.register-title {
+    text-align: center;
+}
+
+.register-form {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.register-input {
+    padding: 5px;
+}
+
+.register-submit {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgb(7, 8, 65);
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}

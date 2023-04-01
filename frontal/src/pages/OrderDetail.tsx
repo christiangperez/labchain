@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Order } from '../interfaces';
+import './OrderDetail.css';
 
 export const OrderDetail = () => {
   const { idOrder } = useParams();
@@ -22,20 +23,19 @@ export const OrderDetail = () => {
   }, []);
 
   return (
-    <div>
-      <div>Order Detail</div>
+    <div className="detail-container">
       {order && (
-        <div>
-          <div>IdOrder: {order.Id}</div>
-          <div>date: {order.Date}</div>
-          <div>dniPatient: {order.DniPatient}</div>
-          <div>namePatient: {order.NamePatient}</div>
-          <div>sexPatient: {order.SexPatient}</div>
-          <div>codAna: {order.CodAna}</div>
-          <div>matProfessional: {order.MatProfessional}</div>
-          <div>prescriptionDate: {order.PrescriptionDate}</div>
-          <div>prescriptionDescription: {order.PrescriptionDescription}</div>
-          <div>totalPrice: {order.TotalPrice}</div>
+        <div className="detail-data">
+          <h1 className="detail-orderid">Order {order.ID}</h1>
+          <div>Date: <b>{order.Date}</b></div>
+          <div>Dni Patient: <b>{order.DniPatient}</b></div>
+          <div>Name Patient: <b>{order.NamePatient}</b></div>
+          <div>Sex Patient: <b>{order.SexPatient}</b></div>
+          <div>Cod Analysis: <b>{order.CodAna}</b></div>
+          <div>Cod Professional: <b>{order.MatProfessional}</b></div>
+          <div>Prescription Date: <b>{order.PrescriptionDate}</b></div>
+          <div>Prescription Description: <b>{order.PrescriptionDescription}</b></div>
+          <div>Total Price: <b>{order.TotalPrice}</b></div>
         </div>
       )}
     </div>

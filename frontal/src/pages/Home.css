@@ -1,0 +1,37 @@
+.home-container {
+    width: 100%;
+}
+
+.home-title {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.home-subtitle {
+    text-align: center;
+}
+
+.home-getstarted {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.home-getstarted-button {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgb(7, 8, 65);
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.home-hyperledger {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.home-footer {
+    margin-top: 50px;
+    text-align: center;
+}

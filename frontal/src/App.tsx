@@ -1,9 +1,12 @@
 import { AppRouter } from './router/AppRouter';
+import { SnackbarProvider } from 'notistack';
 
 const App = () => {
   return (
     <div>
-      <AppRouter />
+      <SnackbarProvider maxSnack={3}>
+        <AppRouter />
+      </SnackbarProvider>
     </div>
   );
 };

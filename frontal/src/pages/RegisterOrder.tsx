@@ -1,5 +1,7 @@
+import { enqueueSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './RegisterOrder.css';
 
 export const RegisterOrder = () => {
   const navigate = useNavigate();
@@ -45,6 +47,7 @@ export const RegisterOrder = () => {
           })
         });
         
+        enqueueSnackbar("Order registered!", { variant: 'success' });
         navigate("/list-orders");
       } catch (error) {
         console.log('error: ', error);
@@ -53,53 +56,61 @@ export const RegisterOrder = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Date" value={date} onChange={(f) => setDate(f.target.value)} />
+    <div className="register-container">
+      <h2 className="register-title">Complete the fields with your order data</h2>
+      <form className="register-form" onSubmit={handleSubmit}>
+        <input className="register-input" type="text" placeholder="Date" value={date} onChange={(f) => setDate(f.target.value)} />
         <input
+          className="register-input"
           type="text"
           placeholder="Dni Patient"
           value={dniPatient}
           onChange={(f) => setDniPatient(f.target.value)}
         />
         <input
+          className="register-input"
           type="text"
           placeholder="Name Patient"
           value={namePatient}
           onChange={(f) => setNamePatient(f.target.value)}
         />
         <input
+          className="register-input"
           type="text"
           placeholder="Sex Patient"
           value={sexPatient}
           onChange={(f) => setSexPatient(f.target.value)}
         />
-        <input type="text" placeholder="Cod analisys" value={codAna} onChange={(f) => setCodAna(f.target.value)} />
+        <input className="register-input" type="text" placeholder="Cod analysis" value={codAna} onChange={(f) => setCodAna(f.target.value)} />
         <input
+          className="register-input"
           type="text"
           placeholder="Cod Professional"
           value={matProfessional}
           onChange={(f) => setMatProfessional(f.target.value)}
         />
         <input
+          className="register-input"
           type="text"
           placeholder="Prescription date"
           value={prescriptionDate}
           onChange={(f) => setPrescriptionDate(f.target.value)}
         />
         <input
+          className="register-input"
           type="text"
           placeholder="Prescription description"
           value={prescriptionDescription}
           onChange={(f) => setPrescriptionDescription(f.target.value)}
         />
         <input
+          className="register-input"
           type="text"
           placeholder="Total price"
           value={totalPrice}
           onChange={(f) => setTotalPrice(f.target.value)}
         />
-        <button>Submit</button>
+        <button className="register-submit">Submit</button>
       </form>
     </div>
   );

@@ -114,7 +114,7 @@ function invokeCreateOrder() {
   export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_LABORATORYA_CA
   export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/users/Admin@laboratoryA.laboratories.com/msp
   export CORE_PEER_ADDRESS=localhost:9051
-  peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.laboratories.com --tls --cafile ${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/msp/tlscacerts/tlsca.laboratories.com-cert.pem -C laboratorieschannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/government.laboratories.com/peers/peer0.government.laboratories.com/tls/ca.crt --peerAddresses localhost:9051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/peers/peer0.laboratoryA.laboratories.com/tls/ca.crt -c '{"function":"RegisterOrder","Args":["1","2023-01-01","31464386","Christian Perez","M","123","1050","2023-01-01","Classic exam","1000"]}'
+  peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.laboratories.com --tls --cafile ${PWD}/organizations/ordererOrganizations/laboratories.com/orderers/orderer.laboratories.com/msp/tlscacerts/tlsca.laboratories.com-cert.pem -C laboratorieschannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/government.laboratories.com/peers/peer0.government.laboratories.com/tls/ca.crt --peerAddresses localhost:9051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/peers/peer0.laboratoryA.laboratories.com/tls/ca.crt -c '{"function":"RegisterOrder","Args":["c7172c87-a890-412c-8aea-c2f8325eb5af","2023-01-01","31464386","Christian Perez","M","123","1050","2023-01-01","Classic exam","1000"]}'
 }
 
 function invokeGetOrderById() {
@@ -123,7 +123,7 @@ function invokeGetOrderById() {
   export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_LABORATORYA_CA
   export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/laboratoryA.laboratories.com/users/Admin@laboratoryA.laboratories.com/msp
   export CORE_PEER_ADDRESS=localhost:9051
-  peer chaincode query -C laboratorieschannel -n basic -c '{"function":"GetOrderById","Args":["1"]}'
+  peer chaincode query -C laboratorieschannel -n basic -c '{"function":"GetOrderById","Args":["c7172c87-a890-412c-8aea-c2f8325eb5af"]}'
 }
 
 function queryGetAllOrders() {
