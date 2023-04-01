@@ -1,6 +1,7 @@
 /labchain-red/chaincode/chaincode-javascript/node_modules
 /api/node_modules
 /api/wallet
+/api/connection-org1.json
 /frontal/build
 /frontal/node_modules
 

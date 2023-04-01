@@ -7,8 +7,8 @@ export const ListOrders = () => {
   const navigate = useNavigate();
 
   const [orders, setOrders] = useState<Orders[]>([]);
-  const handleClickViewDetail = () => {
-    navigate('/order-detail/1');
+  const handleClickViewDetail = (orderId: string) => {
+    navigate(`/order-detail/${orderId}`);
   };
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const ListOrders = () => {
             <div>Name Patient: <b>{order.Record.NamePatient}</b></div>
             <div>Prescription: <b>{order.Record.PrescriptionDate}</b></div>
             <div>Total Price: <b>{order.Record.TotalPrice}</b></div>
-            <button className="list-viewdetail" onClick={handleClickViewDetail}>View Detail</button>
+            <button className="list-viewdetail" onClick={() => handleClickViewDetail(order.Key)}>View Detail</button>
           </div>
         ))}
     </div>
