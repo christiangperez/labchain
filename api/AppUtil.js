@@ -11,7 +11,9 @@ const path = require('path');
 
 exports.buildCCPOrg1 = () => {
 	// load the common connection configuration file
-	const ccpPath = path.resolve(__dirname, '..', '..', 'labchain', 'labchain-red', 'organizations', 'peerOrganizations', 'laboratoryA.laboratories.com', 'connection-org1.json');
+	const ccpPath = path.resolve(__dirname, 'connection-org1.json');
+	console.log("ccpPath: ", ccpPath);
+
 	const fileExists = fs.existsSync(ccpPath);
 	if (!fileExists) {
 		throw new Error(`no such file or directory: ${ccpPath}`);
@@ -20,6 +22,8 @@ exports.buildCCPOrg1 = () => {
 
 	// build a JSON object from the file contents
 	const ccp = JSON.parse(contents);
+
+	console.log("cpp content: ", ccp);
 
 	console.log(`Loaded the network configuration located at ${ccpPath}`);
 	return ccp;
