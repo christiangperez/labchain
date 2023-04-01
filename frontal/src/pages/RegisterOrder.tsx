@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const RegisterOrder = () => {
+  const navigate = useNavigate();
   const [date, setDate] = useState('');
   const [dniPatient, setDniPatient] = useState('');
   const [namePatient, setNamePatient] = useState('');
@@ -27,6 +29,9 @@ export const RegisterOrder = () => {
       try {
         await fetch(`${process.env.REACT_APP_API_URL}/register-order`, {
           method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify({
             date,
             dniPatient,
@@ -39,7 +44,8 @@ export const RegisterOrder = () => {
             totalPrice
           })
         });
-        console.log('order registered');
+        
+        navigate("/list-orders");
       } catch (error) {
         console.log('error: ', error);
       }

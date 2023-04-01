@@ -1,12 +1,28 @@
+interface Record {
+  Date: string;
+  DniPatient: string;
+  NamePatient: string;
+  SexPatient: string;
+  CodAna: string;
+  MatProfessional: string;
+  PrescriptionDate: string;
+  PrescriptionDescription: string;
+  TotalPrice: string;
+}
+export interface Orders {
+  Key: string;
+  Record: Record;
+}
+
 export interface Order {
-  idOrder: number;
-  date: string;
-  dniPatient: string;
-  namePatient: string;
-  sexPatient: string;
-  codAna: string;
-  matProfessional: string;
-  prescriptionDate: string;
-  prescriptionDescription: string;
-  totalPrice: string;
+  Id: string;
+  Date: string;
+  DniPatient: string;
+  NamePatient: string;
+  SexPatient: string;
+  CodAna: string;
+  MatProfessional: string;
+  PrescriptionDate: string;
+  PrescriptionDescription: string;
+  TotalPrice: string;
 }

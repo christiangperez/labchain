@@ -11,7 +11,7 @@ export const OrderDetail = () => {
       try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/get-order/${idOrder}`);
         const data = await response.json();
-        console.log('data: ', data);
+
         setOrder(data);
       } catch (error) {
         console.log('error: ', error);
@@ -26,16 +26,16 @@ export const OrderDetail = () => {
       <div>Order Detail</div>
       {order && (
         <div>
-          <div>IdOrder: {order.idOrder}</div>
-          <div>date: {order.date}</div>
-          <div>dniPatient: {order.dniPatient}</div>
-          <div>namePatient: {order.namePatient}</div>
-          <div>sexPatient: {order.sexPatient}</div>
-          <div>codAna: {order.codAna}</div>
-          <div>matProfessional: {order.matProfessional}</div>
-          <div>prescriptionDate: {order.prescriptionDate}</div>
-          <div>prescriptionDescription: {order.prescriptionDescription}</div>
-          <div>totalPrice: {order.totalPrice}</div>
+          <div>IdOrder: {order.Id}</div>
+          <div>date: {order.Date}</div>
+          <div>dniPatient: {order.DniPatient}</div>
+          <div>namePatient: {order.NamePatient}</div>
+          <div>sexPatient: {order.SexPatient}</div>
+          <div>codAna: {order.CodAna}</div>
+          <div>matProfessional: {order.MatProfessional}</div>
+          <div>prescriptionDate: {order.PrescriptionDate}</div>
+          <div>prescriptionDescription: {order.PrescriptionDescription}</div>
+          <div>totalPrice: {order.TotalPrice}</div>
         </div>
       )}
     </div>
