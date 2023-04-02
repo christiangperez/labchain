@@ -10,6 +10,7 @@ Ejecutar los siguientes comandos de a uno posicionado siempre sobre ~/labchain/l
 cd ~/labchain/labchain-red
 ~~~
 
+### Levantar red
 ~~~
 ./network.sh up-ca
 ./network.sh enroll-and-register
@@ -19,6 +20,7 @@ cd ~/labchain/labchain-red
 ./network.sh install-chaincode
 ~~~
 
+### Probar chaincode
 ~~~
 ./network.sh invoke-create-order
 ./network.sh query-get-all-orders
