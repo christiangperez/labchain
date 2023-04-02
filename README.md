@@ -14,6 +14,7 @@ cd ~/labchain/labchain-red
 ~~~
 ./network.sh up-ca
 ./network.sh enroll-and-register
+./network.sh generate-cpp
 ./network.sh up-laboratories
 ./network.sh create-and-join-channel
 ./network.sh install-dependencies-for-chaincode
