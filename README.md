@@ -35,8 +35,10 @@ docker-compose up -d
 ~~~
 
 ### API + Frontal
+~~~
 ./network.sh api-up
 ./network.sh frontal-up
+~~~
 
 ### Eliminar red
 Si queremos eliminar la red para volver a montarla nuevamente usar el siguiente comando:
