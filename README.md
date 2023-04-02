@@ -37,6 +37,11 @@ cd ~/labchain/labchain-red
 docker-compose up -d
 ~~~
 
+### Probar Explorer
+http://localhost:8080
+user: exploreradmin
+pass: exploreradminpw
+
 ### API + Frontal
 ~~~
 ./network.sh api-up
