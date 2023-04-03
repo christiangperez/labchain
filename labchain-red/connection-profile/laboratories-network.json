@@ -29,7 +29,7 @@
 		"LaboratoryAMSP": {
 			"mspid": "LaboratoryAMSP",
 			"adminPrivateKey": {
-				"path": "/tmp/crypto/peerOrganizations/laboratoryA.laboratories.com/users/User1@laboratoryA.laboratories.com/msp/keystore/c2c4284d1dad82450250b8e8154934385697ea38c1dc5b9aadd22e5b73f7e07c_sk"
+				"path": "/tmp/crypto/peerOrganizations/laboratoryA.laboratories.com/users/User1@laboratoryA.laboratories.com/msp/keystore/fd29b897fdfcea91602e3c271770dd90a28c50ab2c2ee5f4bba8d8bda589d952_sk"
 			},
 			"peers": ["peer0.laboratoryA.laboratories.com"],
 			"signedCert": {
